@@ -5,9 +5,10 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     [SerializeField]
-    float xDirectional;
+    KeyCode menuKey;
+
     [SerializeField]
-    float yDirectional;
+    float xDirectional;
     [SerializeField]
     float movementSpeed;
     [SerializeField]
@@ -15,12 +16,16 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        yDirectional = Input.GetAxis("Vertical");
         xDirectional = Input.GetAxis("Horizontal");
 
-        var move=(this.transform.up*yDirectional+this.transform.right*xDirectional)*movementSpeed*Time.deltaTime;
+        var move=(this.transform.right*xDirectional)*movementSpeed*Time.deltaTime;
 
         this.transform.position += move;
+
+        if(Input.GetKeyDown(menuKey))
+        {
+            //call menu
+        }
 
     }
 }
