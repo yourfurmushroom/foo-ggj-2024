@@ -6,11 +6,11 @@ public class movement : MonoBehaviour
 {
     [SerializeField]
     KeyCode menuKey;
-
+    [SerializeField] private float moveLerp = .5f;
     [SerializeField]
     float xDirectional;
     [SerializeField]
-    float movementSpeed;
+    float moveSpeed;
     [SerializeField]
     float movementDistance;
     // Update is called once per frame
@@ -18,14 +18,19 @@ public class movement : MonoBehaviour
     {
         xDirectional = Input.GetAxis("Horizontal");
 
-        var move=(this.transform.right*xDirectional)*movementSpeed*Time.deltaTime;
+        var calculatedBodyPosition = CalBodyPosition(this.transform.position, this.transform.right, xDirectional);
+        this.transform.position = Vector3.Lerp(this.transform.position, calculatedBodyPosition, moveLerp);
 
-        this.transform.position += move;
 
         if(Input.GetKeyDown(menuKey))
         {
             //call menu
         }
 
+    }
+
+    private Vector3 CalBodyPosition(Vector3 position, Vector3 right, float input)
+    {
+        return position + (right * input * moveSpeed * Time.deltaTime);
     }
 }
