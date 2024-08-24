@@ -22,6 +22,7 @@
 
 ### Specs
 |Title|Output|
+|-|-|
 |[Main Menu UI]||
 
 ## Commands
@@ -33,4 +34,4 @@ git co <yourbranchname>
 git co main -- "*/TextMesh Pro/*" ./.gitignore
 ```
 
-[Main Menu UI]: 
+[Main Menu UI]: docs/spec-00001.md
