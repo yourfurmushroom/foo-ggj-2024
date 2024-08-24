@@ -31,11 +31,6 @@ public class BackgroundController : MonoBehaviour
         }
         UpdateHeightAndPosY();
     }
-    void Start()
-    {
-
-        Debug.Log(17.56 % 8);
-    }
     public void FixedUpdate()
     {
         OnUpdate(Time.time);
@@ -49,7 +44,6 @@ public class BackgroundController : MonoBehaviour
     {
         var timeElapse = time - _startTime;
         var totalHeight = _heights.Sum();
-        Debug.Log(totalHeight);
         timeElapse %= (totalHeight / _speed);
         for (int i = 0; i < _backgrounds.Length; i++)
         {
@@ -60,16 +54,6 @@ public class BackgroundController : MonoBehaviour
             _backgrounds[0].position -= totalHeight * Vector3.up;
         }
     }
-    //private void Rotate()
-    //{
-    //    var bg = _backgrounds[0];
-    //    for (int i = 0; i < _count-1; i++)
-    //    {
-    //        _backgrounds[i] = _backgrounds[i + 1];
-    //    }
-    //    _backgrounds[_count - 1] = bg;
-    //    UpdateHeightAndPosY();
-    //}
     private void UpdateHeightAndPosY()
     {
         for (int i = 0; i < _count; i++)
@@ -80,7 +64,6 @@ public class BackgroundController : MonoBehaviour
         for (int i = 1; i < _count; i++)
         {
            
-            Debug.Log($"{i}: {_heights[i]}");
             _startPosY[i] =
                 _startPosY[i - 1] -
                 _heights[i - 1] / 2 -
