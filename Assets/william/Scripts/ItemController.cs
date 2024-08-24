@@ -78,11 +78,13 @@ public class ItemController : MonoBehaviour
             {
                 case "Player":
                     Debug.Log("Player Hit");
+                    item.ItemCustomAction();
                     break;
                 case "DeadZone":
                     Debug.Log("DeadZone Hit");
                     break;
             };
+
             OnRemoveItem(item);
         };
         _items.Add(item);
@@ -108,20 +110,21 @@ public class SpeedAttribute
 {
     public float speed
     {
-        get { return speed; }
+        get { return _speed; }
         set
         {
-            speed = value;
+            _speed = value;
             //最大速度為10
-            if (speed > 10)
+            if (_speed > 10)
             {
-                speed = 10;
+                _speed = 10;
             }
             //最小速度為1
-            if (speed < 1)
+            if (_speed < 1)
             {
-                speed = 1;
+                _speed = 1;
             }
         }
     }
+    private float _speed;
 }
