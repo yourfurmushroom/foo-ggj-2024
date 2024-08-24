@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 
-public class TestItem : Item
+public class ABCItem : Item
 {
-    //改變速度的值
-    public float modifySpeed = 1.0f;
+    //改變生命力的值
+    public float value = 1.0f;
     public SpeedAttribute speedAttribute;
+    public string alphabetTag = "A";
+    public TextMeshProUGUI alphabetText;
     public override void Init(Dictionary<string, Attribute> dic)
     {
         base.Init(dic);
         speedAttribute = attributeDic["SpeedAttribute"] as SpeedAttribute;
-        Debug.Log("TestItem Init");
+        alphabetText.text = alphabetTag;
     }
 
     public override void Move()
     {
-        // Debug.Log("TestItem Move");
         //往上移動一點距離，使用time.deltaTime來讓移動速度不受framerate影響
         transform.position += Vector3.up * speedAttribute.speed * Time.deltaTime;
     }
@@ -29,18 +30,15 @@ public class TestItem : Item
 
     public override void ItemTriggerEnter(Collider2D other)
     {
-        Debug.Log("TestItem OnTriggerEnter");
-        //如果碰到deadZoneBoxCollider，就呼叫Remove方法
         onHit?.Invoke(other.tag);
     }
     override public void ItemCustomAction()
     {
-        speedAttribute.speed += modifySpeed;
-        Debug.Log("TestItem CustomAction");
+        Debug.Log("ABCItem CustomAction get alphabetTag: " + alphabetTag);
+        //TODO: Add tag to game manager
     }
     override public void Remove()
     {
-        Debug.Log("TestItem Remove");
         //移除物品
         Destroy(gameObject);
     }

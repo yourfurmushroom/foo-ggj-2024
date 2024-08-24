@@ -7,7 +7,8 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Action<string> onHit;
-    public SpeedAttribute speedAttribute;
+    public Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,9 @@ public class Item : MonoBehaviour
     }
 
     //初始化
-    public virtual void Init(SpeedAttribute speed)
+    public virtual void Init(Dictionary<string, Attribute> dic)
     {
-        this.speedAttribute = speed;
+        attributeDic = dic;
     }
 
     public virtual void Move()

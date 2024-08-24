@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,16 +10,17 @@ public class ItemController : MonoBehaviour
     public Transform posRoot;
     //隨機產生的position位置
     private List<Transform> points = new List<Transform>();
+    //開始前的等待時間
+    public float startDelay = 1.0f;
     //產生的間隔時間
     public float interval = 1.0f;
-    //speedAttribute 的 speed
-    public float speed = 1.0f;
+
     //產生的物品prefab
     public List<GameObject> itemPrefabs;
     public BoxCollider deadZoneBoxCollider;
     //所有產生的物品
     private List<Item> _items = new List<Item>();
-    private SpeedAttribute speedAttribute = new SpeedAttribute();
+    private Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
 
     private void Awake()
     {
@@ -26,7 +28,29 @@ public class ItemController : MonoBehaviour
         {
             points.Add(posRoot.GetChild(i));
         }
-        speedAttribute.speed = speed;
+    }
+
+    /// <summary>
+    /// 設定生命力屬性
+    /// </summary>
+    /// <param name="hp">傳入外部參考</param>
+    public void SetHpAttribute(HpAttribute hp)
+    {
+        attributeDic.Add("HpAttribute", hp);
+        hp.onDead += () =>
+        {
+            Debug.Log("Dead");
+            //TODO:死亡處理
+        };
+    }
+
+    /// <summary>
+    /// 設定速度屬性
+    /// </summary>
+    /// <param name="speed"></param>
+    public void SetSpeedAttribute(SpeedAttribute speed)
+    {
+        attributeDic.Add("SpeedAttribute", speed);
     }
 
     // Start is called before the first frame update
@@ -52,6 +76,12 @@ public class ItemController : MonoBehaviour
     //開始自動產生物品
     public void StartAutoGenerate()
     {
+        StartCoroutine(GenerateItemCoroutine());
+    }
+
+    IEnumerator GenerateItemCoroutine()
+    {
+        yield return new WaitForSeconds(startDelay);
         //用InvokeRepeating來重複呼叫GenerateItem方法
         InvokeRepeating("GenerateItem", 0, interval);
     }
@@ -71,7 +101,7 @@ public class ItemController : MonoBehaviour
         Vector3 position = points[index].position;
         //產生物品
         Item item = Instantiate(itemPrefab, position, Quaternion.identity).GetComponent<Item>();
-        item.Init(speedAttribute);
+        item.Init(attributeDic);
         item.onHit += (itemTag) =>
         {
             switch (itemTag)
@@ -106,7 +136,13 @@ public class ItemController : MonoBehaviour
 }
 
 [Serializable]
-public class SpeedAttribute
+public class Attribute
+{
+
+}
+
+[Serializable]
+public class SpeedAttribute : Attribute
 {
     public float speed
     {
@@ -126,5 +162,34 @@ public class SpeedAttribute
             }
         }
     }
+    [SerializeField]
     private float _speed;
+}
+
+[Serializable]
+public class HpAttribute : Attribute
+{
+    public float hp
+    {
+        get { return _hp; }
+        set
+        {
+            _hp = value;
+            //最大生命力為10
+            if (_hp > 10)
+            {
+                _hp = 10;
+            }
+            if (_hp <= 0)
+            {
+                onDead?.Invoke();
+                //TODO:死亡處理
+            }
+        }
+    }
+    [SerializeField]
+    private float _hp;
+
+    public Action<float> onHpChange;
+    public Action onDead;
 }

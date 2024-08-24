@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6460700933195405176}
   - component: {fileID: 2250937913740974948}
   m_Layer: 0
-  m_Name: TestItem 2
+  m_Name: EnergyDrink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.9098039, g: 0.3882353, b: 0.41657504, a: 1}
+  m_Color: {r: 0.29019612, g: 0.9490196, b: 0.34084347, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedAttribute:
     speed: 1
-  modifySpeed: -2
+  modifySpeed: 3
 --- !u!61 &2250937913740974948
 BoxCollider2D:
   m_ObjectHideFlags: 0
