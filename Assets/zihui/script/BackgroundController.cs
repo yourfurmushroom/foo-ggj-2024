@@ -5,23 +5,25 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    [SerializeField]
-    float scrollSpeed = 0.5f;
-    float totalHeight;  
-    List<Transform> backgrounds; 
+    public float scrollSpeed = 0.1f;
+    public float totalHeight;  
+    public List<Transform> backgrounds; 
 
-    Vector3 startPosition;
+    private Vector3 startPosition;
     
 
     private void Awake()
     {
-        backgrounds = new List<Transform>();
         for (int i = 0; i < this.transform.childCount; i++)
         {
             backgrounds.Add(this.transform.GetChild(i));
         }
+    }
+    void Start()
+    {
         startPosition = backgrounds[0].position;
-        totalHeight = backgrounds[0].transform.localScale.y * backgrounds[0].GetComponent<SpriteRenderer>().bounds.size.y;
+        totalHeight = Math.Abs(backgrounds[1].position.y)*3;
+        Debug.Log(totalHeight);
     }
 
     void Update()
