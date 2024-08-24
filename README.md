@@ -19,3 +19,12 @@
 |itch.io Project||https://yourfurmushroom.itch.io/legacy|
 |itch.io GameJam Page||https://itch.io/jam/faust-game-jam-2024|
 |Google Drive|Put all resources here|https://drive.google.com/drive/folders/1oFeRsJ_mdLOqoo02enjWPNR-8ahfFSAZ?usp=sharing|
+
+## Commands
+### Merge TextMesh Pro into your branch
+```pwsh
+git co main
+git pull
+git co <yourbranchname>
+git co main -- "*/TextMesh Pro/*" ./.gitignore
+```
