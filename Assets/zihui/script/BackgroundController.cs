@@ -22,7 +22,7 @@ public class BackgroundController : MonoBehaviour
     void Start()
     {
         startPosition = backgrounds[0].position;
-        totalHeight = Math.Abs(backgrounds[1].position.y)*3;
+        totalHeight = Math.Abs(backgrounds[1].position.y)* this.transform.childCount;
         Debug.Log(totalHeight);
     }
 
@@ -32,7 +32,7 @@ public class BackgroundController : MonoBehaviour
         {
             backgrounds[i].Translate(Vector2.up * scrollSpeed * Time.deltaTime);
 
-            if (backgrounds[i].position.y > startPosition.y + totalHeight/3)
+            if (backgrounds[i].position.y > startPosition.y + totalHeight/ this.transform.childCount)
             {
                 Vector3 newPos = backgrounds[i].position;
                 newPos.y -= totalHeight;

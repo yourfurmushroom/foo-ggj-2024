@@ -7,12 +7,10 @@ public class movement : MonoBehaviour
     [SerializeField]
     KeyCode menuKey;
     [SerializeField] private float moveLerp = .5f;
-    [SerializeField]
     float xDirectional;
     [SerializeField]
     float moveSpeed;
-    [SerializeField]
-    float movementDistance;
+    
     // Update is called once per frame
     void Update()
     {
