@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestItemBehavior : MonoBehaviour
 {
     public List<ItemController> itemControllers;
+    public BackgroundController backgroundController;
     //speedAttribute 的 speed
     public float speed = 1.0f;
     public float hp = 100;
@@ -21,6 +22,7 @@ public class TestItemBehavior : MonoBehaviour
             itemController.SetSpeedAttribute(speedAttribute);
             itemController.StartAutoGenerate();
         }
+        backgroundController.speedAttribute = speedAttribute;
     }
 
     // Update is called once per frame

@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    public float scrollSpeed = 0.1f;
-    public float totalHeight;  
-    public List<Transform> backgrounds; 
+    // public float scrollSpeed = 0.1f;
+    public SpeedAttribute speedAttribute = new SpeedAttribute();
+    public float totalHeight;
+    public List<Transform> backgrounds;
 
     private Vector3 startPosition;
-    
+
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class BackgroundController : MonoBehaviour
     void Start()
     {
         startPosition = backgrounds[0].position;
-        totalHeight = Math.Abs(backgrounds[1].position.y)*3;
+        totalHeight = Math.Abs(backgrounds[1].position.y) * 3;
         Debug.Log(totalHeight);
     }
 
@@ -30,9 +31,9 @@ public class BackgroundController : MonoBehaviour
     {
         for (int i = 0; i < backgrounds.Count; i++)
         {
-            backgrounds[i].Translate(Vector2.up * scrollSpeed * Time.deltaTime);
+            backgrounds[i].Translate(Vector2.up * speedAttribute.speed * Time.deltaTime);
 
-            if (backgrounds[i].position.y > startPosition.y + totalHeight/3)
+            if (backgrounds[i].position.y > startPosition.y + totalHeight / 3)
             {
                 Vector3 newPos = backgrounds[i].position;
                 newPos.y -= totalHeight;

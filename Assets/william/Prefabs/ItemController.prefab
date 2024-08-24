@@ -242,13 +242,12 @@ MonoBehaviour:
   posRoot: {fileID: 6602905783749721986}
   startDelay: 0
   interval: 1.5
-  speed: 3
   itemPrefabs:
   - {fileID: 7477186776062683093, guid: 0598132ec8aef5a49b266e2bec33d020, type: 3}
   - {fileID: 7477186776062683093, guid: bd5d00ba028e10f489eff29310b9db8c, type: 3}
   - {fileID: 7477186776062683093, guid: fcca7ac6176c89c4ebda90b3feabb54f, type: 3}
   - {fileID: 2816635363074886554, guid: 7155e36ab2914ee4f86e5166f61eaf05, type: 3}
-  deadZoneBoxCollider: {fileID: 0}
+  vfxValuePrefab: {fileID: 2018250837690811074, guid: 3eac1e858f7df774a9d7ceb55fc857f4, type: 3}
 --- !u!1 &6602905784907040527
 GameObject:
   m_ObjectHideFlags: 0

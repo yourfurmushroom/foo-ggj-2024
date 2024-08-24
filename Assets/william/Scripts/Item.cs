@@ -8,6 +8,12 @@ public class Item : MonoBehaviour
 {
     public Action<string> onHit;
     public Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
+    private GameObject vfxValuePrefab;
+    protected string vfxValue = "none";
+    public void SetVFXValuePrefab(GameObject go)
+    {
+        vfxValuePrefab = go;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +38,10 @@ public class Item : MonoBehaviour
     }
     public virtual void ItemCustomAction()
     {
+        //在物件的原點產生特效
+        GameObject go = Instantiate(vfxValuePrefab, transform.position, Quaternion.identity);
+        VFXValue vFXValue = go.GetComponent<VFXValue>();
+        vFXValue.SetText(vfxValue);
     }
     public virtual void ItemTriggerEnter(Collider2D other)
     {

@@ -35,6 +35,8 @@ public class ABCItem : Item
     override public void ItemCustomAction()
     {
         Debug.Log("ABCItem CustomAction get alphabetTag: " + alphabetTag);
+        vfxValue = "Got " + alphabetTag + "!";
+        base.ItemCustomAction();
         //TODO: Add tag to game manager
     }
     override public void Remove()

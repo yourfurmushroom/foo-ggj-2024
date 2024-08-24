@@ -56,6 +56,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6602905784454369113, guid: 2de3af5d898fcc7409b685b90c2c2f19, type: 3}
+      propertyPath: vfxValuePrefab
+      value: 
+      objectReference: {fileID: 2018250837690811074, guid: 3eac1e858f7df774a9d7ceb55fc857f4, type: 3}
+    - target: {fileID: 6602905784454369113, guid: 2de3af5d898fcc7409b685b90c2c2f19, type: 3}
       propertyPath: itemPrefabs.Array.size
       value: 6
       objectReference: {fileID: 0}

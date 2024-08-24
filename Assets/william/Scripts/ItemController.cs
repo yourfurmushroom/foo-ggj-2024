@@ -17,7 +17,8 @@ public class ItemController : MonoBehaviour
 
     //產生的物品prefab
     public List<GameObject> itemPrefabs;
-    public BoxCollider deadZoneBoxCollider;
+    // public BoxCollider deadZoneBoxCollider;
+    public GameObject vfxValuePrefab;
     //所有產生的物品
     private List<Item> _items = new List<Item>();
     private Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
@@ -102,6 +103,7 @@ public class ItemController : MonoBehaviour
         //產生物品
         Item item = Instantiate(itemPrefab, position, Quaternion.identity).GetComponent<Item>();
         item.Init(attributeDic);
+        item.SetVFXValuePrefab(vfxValuePrefab);
         item.onHit += (itemTag) =>
         {
             switch (itemTag)
