@@ -8,8 +8,10 @@ public class movement : MonoBehaviour
     float xDirectional;
     [SerializeField]
     float moveSpeed;
-    
+
     // Update is called once per frame
+
+
     void OnUpdate(float time)
     {
         xDirectional = Input.GetAxis("Horizontal");
