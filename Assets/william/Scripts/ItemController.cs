@@ -22,6 +22,7 @@ public class ItemController : MonoBehaviour
     //所有產生的物品
     private List<Item> _items = new List<Item>();
     private Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
+    private bool buffActive = false;
 
     private void Awake()
     {
@@ -104,13 +105,19 @@ public class ItemController : MonoBehaviour
         Item item = Instantiate(itemPrefab, position, Quaternion.identity).GetComponent<Item>();
         item.Init(attributeDic);
         item.SetVFXValuePrefab(vfxValuePrefab);
-        item.onHit += (itemTag) =>
+        item.onHitFrom += (FromTag) =>
         {
-            switch (itemTag)
+            switch (FromTag)
             {
                 case "Player":
                     Debug.Log("Player Hit");
-                    item.ItemCustomAction();
+                    if (!buffActive)
+                    {
+
+                        item.ItemCustomAction();
+                        //過5秒後取消buff
+                        // StartCoroutine(CancelBuff());
+                    }
                     break;
                 case "DeadZone":
                     Debug.Log("DeadZone Hit");
@@ -120,6 +127,24 @@ public class ItemController : MonoBehaviour
             OnRemoveItem(item);
         };
         _items.Add(item);
+    }
+
+    IEnumerator ActiveBuff(Item itemSource)
+    {
+        buffActive = true;
+        switch (itemSource.GetItemTypeName())
+        {
+            case "TestItem":
+                SpeedAttribute speedAttribute = attributeDic["SpeedAttribute"] as SpeedAttribute;
+                speedAttribute.speed += 1;
+                break;
+            case "HpItem":
+                HpAttribute hpAttribute = attributeDic["HpAttribute"] as HpAttribute;
+                hpAttribute.hp += 1;
+                break;
+        }
+        yield return new WaitForSeconds(5);
+        buffActive = false;
     }
 
     public void OnRemoveItem(Item item)
@@ -162,10 +187,15 @@ public class SpeedAttribute : Attribute
             {
                 _speed = 1;
             }
+            Debug.Log("Speed: " + _speed);
         }
     }
     [SerializeField]
     private float _speed;
+    public void ToZero()
+    {
+        _speed = 0;
+    }
 }
 
 [Serializable]

@@ -31,7 +31,7 @@ public class TestItem : Item
     {
         Debug.Log("TestItem OnTriggerEnter");
         //如果碰到deadZoneBoxCollider，就呼叫Remove方法
-        onHit?.Invoke(other.tag);
+        onHitFrom?.Invoke(other.tag);
     }
     override public void ItemCustomAction()
     {

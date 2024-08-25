@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public Action<string> onHit;
+    public Action<string> onHitFrom;
     public Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
     private GameObject vfxValuePrefab;
     protected string vfxValue = "none";
@@ -48,5 +48,9 @@ public class Item : MonoBehaviour
     }
     public virtual void Remove()
     {
+    }
+    public virtual string GetItemTypeName()
+    {
+        return "Item";
     }
 }

@@ -30,7 +30,7 @@ public class ABCItem : Item
 
     public override void ItemTriggerEnter(Collider2D other)
     {
-        onHit?.Invoke(other.tag);
+        onHitFrom?.Invoke(other.tag);
     }
     override public void ItemCustomAction()
     {

@@ -1,5 +1,6 @@
 using CompanyName.Domain;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,20 +27,34 @@ public class GameContext
     public float time { get => _time; set => _time = value; }
     public float dropSpeed { get => _dropSpeed; set => _dropSpeed = value; }
     public EquipmentContext equipmentContext { get => _equipmentContext; set => _equipmentContext = value; }
+
+    public SpeedAttribute speedAttribute = new SpeedAttribute();
 }
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private ApplicationConfiguration _applicationConfiguration;
     [SerializeField] private GameContext _context;
-    
+
     [SerializeField] private GameMenuWindow _gameMenuWindow;
     [SerializeField] private GameOverWindow _gameOverWindow;
     [SerializeField] private GamePlayWindow _gamePlayWindow;
+
+    public List<ItemController> itemControllers;
+    public BackgroundController backgroundController;
+    public movement playerMovement;
 
     private void Awake()
     {
         _gameMenuWindow?.closed?.AddListener(OnMenuWindowClosed);
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
+
+        _context.speedAttribute.speed = _context.dropSpeed;
+        foreach (var itemController in itemControllers)
+        {
+            itemController.SetSpeedAttribute(_context.speedAttribute);
+            itemController.StartAutoGenerate();
+        }
+        backgroundController.speedAttribute = _context.speedAttribute;
     }
 
     private void OnMenuWindowClosed()
@@ -58,10 +73,10 @@ public class GameManager : MonoBehaviour
             case GameState.GameMenu:
                 break;
             case GameState.GamePlay:
-                _context.time += Time.deltaTime;
-                _context.hp -= Time.deltaTime;
-                _context.depth += _context.dropSpeed * Time.deltaTime;
-                if(_context.hp <= 0)
+                _context.time -= Time.deltaTime;
+                // _context.hp -= Time.deltaTime;
+                _context.depth += _context.speedAttribute.speed * Time.deltaTime;
+                if (_context.time <= 0)
                 {
                     OnHpZero();
                 }
@@ -95,6 +110,15 @@ public class GameManager : MonoBehaviour
     private void OnHpZero()
     {
         _context.state = GameState.GameOver;
+        _context.speedAttribute.ToZero();
+        playerMovement.activeFlag = false;
+
+        StartCoroutine(GameOverCoroutine());
+    }
+
+    IEnumerator GameOverCoroutine()
+    {
+        yield return new WaitForSeconds(2);
         var equipments = _context.equipmentContext.equipments;
         var newGainEquipments = _context.equipmentContext.GetNewGainEquipments();
         var icons = newGainEquipments.Select(i => equipments[i].icon).ToArray();

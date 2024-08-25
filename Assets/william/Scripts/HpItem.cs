@@ -30,8 +30,7 @@ public class HpItem : Item
     public override void ItemTriggerEnter(Collider2D other)
     {
         Debug.Log("HpItem OnTriggerEnter");
-        //如果碰到deadZoneBoxCollider，就呼叫Remove方法
-        onHit?.Invoke(other.tag);
+        onHitFrom?.Invoke(other.tag);
     }
     override public void ItemCustomAction()
     {
