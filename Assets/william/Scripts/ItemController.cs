@@ -258,6 +258,11 @@ public class ItemController : MonoBehaviour
             return itemPrefabs[UnityEngine.Random.Range(0, itemPrefabs.Count)];
         }
     }
+
+    public void OnGameOver()
+    {
+        StopAllCoroutines();
+    }
 }
 
 [Serializable]

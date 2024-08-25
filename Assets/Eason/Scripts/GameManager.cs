@@ -152,6 +152,10 @@ public class GameManager : MonoBehaviour
         _context.state = GameState.GameOver;
         _context.speedAttribute.ToZero();
         playerMovement.activeFlag = false;
+        foreach (var itemController in itemControllers)
+        {
+            itemController.OnGameOver();
+        }
 
         StartCoroutine(GameOverCoroutine());
     }
