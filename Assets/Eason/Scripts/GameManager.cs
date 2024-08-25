@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         _gameMenuWindow?.closed?.AddListener(OnMenuWindowClosed);
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
-
+        _gamePlayWindow?.SetBuff("無Buff");
         _context.speedAttribute.speed = _context.dropSpeed;
         foreach (var itemController in itemControllers)
         {
