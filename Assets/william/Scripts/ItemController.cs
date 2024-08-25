@@ -121,10 +121,19 @@ public class ItemController : MonoBehaviour
         int count = UnityEngine.Random.Range(0, 10) < 5 ? 1 : UnityEngine.Random.Range(0, 10) < 3 ? 2 : 3;
         //紀錄這次產生的物品
         List<GameObject> tempItems = new List<GameObject>();
+        //紀錄已經生成的位置
+        List<int> tempIndex = new List<int>();
         for (int i = 0; i < count; i++)
         {
             //隨機選擇一個位置
             int index = UnityEngine.Random.Range(0, points.Count);
+
+            //如果這次產生的位置已經有物品，就重新選擇
+            while (tempIndex.Contains(index))
+            {
+                index = UnityEngine.Random.Range(0, points.Count);
+            }
+            tempIndex.Add(index);
             Vector3 position = points[index].position;
             GameObject obj = itemPrefab;
             if (count != 1)
@@ -215,12 +224,13 @@ public class ItemController : MonoBehaviour
                 //全場景變暗
                 buffActive = true;
                 addTime = 2;
-
+                playerMovement.fog.transform.localScale = new Vector3(3, 3, 3);
                 break;
             case "B":
                 //全場景變亮
                 buffActive = true;
                 addTime = 2;
+                playerMovement.fog.transform.localScale = new Vector3(12, 12, 12);
                 break;
             case "M":
                 //標示其他字母
@@ -240,6 +250,7 @@ public class ItemController : MonoBehaviour
         yield return new WaitForSeconds(5);
         //速度變回原本的速度
         speedAttribute.speed = ori_speed;
+        playerMovement.fog.transform.localScale = new Vector3(6, 6, 6);
         playerMovement.enabled = true;
         switch (alphabetTag)
         {
