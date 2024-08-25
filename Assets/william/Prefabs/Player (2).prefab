@@ -138,6 +138,7 @@ MonoBehaviour:
   moveSpeed: 10
   activeFlag: 1
   rb: {fileID: 3800211594003014755}
+  fog: {fileID: 3800211592827282511}
 --- !u!61 &3800211592762049394
 BoxCollider2D:
   m_ObjectHideFlags: 0

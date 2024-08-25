@@ -13,6 +13,7 @@ public class movement : MonoBehaviour
     public bool activeFlag = true;
     public Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
+    public GameObject fog;
 
     // Start is called before the first frame update
     void Start()
