@@ -26,6 +26,11 @@ public class ItemController : MonoBehaviour
     private bool buffActive = false;
     [SerializeField] private GameContext _context;
     public Action<string> triggerAlphabetTagEnter;
+    public Action triggerEquipmentGet;
+    public Action cleanAlphabetTag;
+    private List<string> LEGACY = new List<string> { "L", "E", "G", "A", "C", "Y" };
+    //收集的字母
+    private List<string> collectedAlphabet = new List<string>();
     private void Awake()
     {
         for (int i = 0; i < posRoot.childCount; i++)
@@ -139,6 +144,23 @@ public class ItemController : MonoBehaviour
 
                             string alphabetTag = item.ItemCustomAction();
                             triggerAlphabetTagEnter?.Invoke(alphabetTag);
+                            //檢查是否為LEGACY字母
+                            if (LEGACY.Contains(alphabetTag))
+                            {
+                                //如果已經收集過，就不再加入
+                                if (!collectedAlphabet.Contains(alphabetTag))
+                                {
+                                    collectedAlphabet.Add(alphabetTag);
+                                    //如果收集到LEGACY字母，就發送事件
+                                    if (collectedAlphabet.Count == LEGACY.Count)
+                                    {
+                                        triggerEquipmentGet?.Invoke();
+                                        //並清空收集的字母
+                                        collectedAlphabet.Clear();
+                                        cleanAlphabetTag?.Invoke();
+                                    }
+                                }
+                            }
                             Debug.Log("Player Hit alphabetTag: " + alphabetTag);
                             StartCoroutine(ActiveBuff(alphabetTag));
                         }

@@ -76,6 +76,15 @@ public class GameManager : MonoBehaviour
                 }
                 _gamePlayWindow?.ActivateLetter(index, true);
             };
+            itemController.triggerEquipmentGet += () =>
+            {
+                // _context.legacyEquipment++;
+                // _gamePlayWindow?.AddEquipment(_context.equipmentContext.equipments[0].icon);
+            };
+            itemController.cleanAlphabetTag += () =>
+            {
+                _gamePlayWindow?.CleanAllLetter();
+            };
         }
         backgroundController.speedAttribute = _context.speedAttribute;
 

@@ -43,6 +43,15 @@ public class GamePlayWindow : Window
         // _letterIcon[index].color = active ? _letterActiveColor : _letterDeactiveColor;
     }
 
+    //關掉所有字母
+    public void CleanAllLetter()
+    {
+        foreach (var letter in _letterGameObjects)
+        {
+            letter.SetActive(false);
+        }
+    }
+
     public void AddEquipment(Sprite icon)
     {
         var instance = Instantiate(_equipmentIconPrefab, _equimentIconParent);
