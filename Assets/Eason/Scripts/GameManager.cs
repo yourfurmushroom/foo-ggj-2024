@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         _gameMenuWindow?.closed?.AddListener(OnMenuWindowClosed);
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
+        _gamePlayWindow.Initialize(_context.equipmentContext.equipments.Select(o=>o.icon).ToArray());
         _gamePlayWindow?.SetBuff("無Buff");
         _context.speedAttribute.speed = _context.dropSpeed;
         _context.equipmentContext.equipmentAdded += (i) =>

@@ -1,7 +1,9 @@
 ﻿using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -26,23 +28,15 @@ public class EquipmentContext
     public List<int> equippedEquipments { get => _equippedEquipments; }
     public int[] GetNotGainEquipments()
     {
-        var count = equipments.Length;
-        var equippedCount = equippedEquipments.Count;
-        var notGainCount = count - equippedCount;
-        var rt = new int[notGainCount];
-        var i = 0;
-        var j = 0;
-        var k = 0;
-        while (i < count)
+        var rt = equipments.Select(o => o.id).ToList();
+        for (int i = 0; i < equippedEquipments.Count; i++)
         {
-            if (_equippedEquipments[j] < i)
-            {
-                rt[k++] = i;
-            }
-            i++;
+            rt.Remove(equippedEquipments[i]);
         }
-        return rt;
+        return rt.ToArray();
     }
+
+    [Button]
     public int[] GetNewGainEquipments()
     {
         var repoCount = _repositoryEquipments.Count;
@@ -58,7 +52,8 @@ public class EquipmentContext
             var k = 0;
             while (k < diffCount)
             {
-                if (equippedEquipments[i] != repositoryEquipments[j])
+                //Debug.Log($"{i},{j},{k},\n{equippedEquipments[i]},{repositoryEquipments[j]},{rt[k]},\n,\n{diffCount}");
+                if (j >= repositoryEquipments.Count || equippedEquipments[i] != repositoryEquipments[j])
                 {
                     rt[k++] = equippedEquipments[i];
                 }

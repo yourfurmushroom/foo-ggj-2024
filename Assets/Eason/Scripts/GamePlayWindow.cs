@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Sirenix.OdinInspector;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +23,9 @@ public class GamePlayWindow : Window
     [SerializeField] private GameObject[] _letterGameObjects;
 
 
-    private void Initialized()
+    public void Initialize(Sprite[] icons)
     {
+        _icons = icons;
     }
 
     void Update()
@@ -57,7 +59,7 @@ public class GamePlayWindow : Window
             letter.SetActive(false);
         }
     }
-
+    [Button]
     public void AddEquipment(int index)
     {
         var instance = Instantiate(_equipmentIconPrefab, _equimentIconParent);
