@@ -115,10 +115,13 @@ public class ItemController : MonoBehaviour
             int index = UnityEngine.Random.Range(0, points.Count);
             Vector3 position = points[index].position;
             GameObject obj = itemPrefab;
-            //如果這次產生的物品已經有了，就重新產生
-            while (tempItems.Contains(obj))
+            if (count != 1)
             {
-                obj = itemPrefab;
+                //如果這次產生的物品已經有了，就重新產生
+                while (tempItems.Contains(obj))
+                {
+                    obj = itemPrefab;
+                }
             }
             tempItems.Add(obj);
             Item item = Instantiate(obj, position, Quaternion.identity).GetComponent<Item>();
@@ -129,19 +132,17 @@ public class ItemController : MonoBehaviour
                 switch (FromTag)
                 {
                     case "Player":
-                        Debug.Log("Player Hit");
+                        // Debug.Log("Player Hit");
                         if (!buffActive)
                         {
 
                             string alphabetTag = item.ItemCustomAction();
-                            float addTime = alphabetTag == "T" ? 10 : 2;
-                            _context.time += addTime;
-
+                            Debug.Log("Player Hit alphabetTag: " + alphabetTag);
                             StartCoroutine(ActiveBuff(alphabetTag));
                         }
                         break;
                     case "DeadZone":
-                        Debug.Log("DeadZone Hit");
+                        // Debug.Log("DeadZone Hit");
                         break;
                 };
 
@@ -154,33 +155,49 @@ public class ItemController : MonoBehaviour
 
     IEnumerator ActiveBuff(string alphabetTag)
     {
-        buffActive = true;
-        SpeedAttribute speedAttribute = attributeDic["SpeedAttribute"] as SpeedAttribute;
+        SpeedAttribute speedAttribute = _context.speedAttribute;
         float ori_speed = speedAttribute.speed;
+        float addTime = 0;
         switch (alphabetTag)
         {
             case "F":
                 //速度變兩倍
-                speedAttribute.speed *= 2;
+                buffActive = true;
+                speedAttribute.speed -= 2;
+                addTime = 2;
                 break;
             case "S":
                 //速度變一半
-                speedAttribute.speed /= 2;
+                buffActive = true;
+                speedAttribute.speed += 2;
+                addTime = 2;
                 break;
             case "P":
                 //玩家無法移動
+                buffActive = true;
                 playerMovement.enabled = false;
+                addTime = 2;
                 break;
             case "D":
                 //全場景變暗
+                buffActive = true;
+                addTime = 2;
                 break;
             case "B":
                 //全場景變亮
+                buffActive = true;
+                addTime = 2;
                 break;
             case "M":
                 //標示其他字母
+                buffActive = true;
+                addTime = 2;
+                break;
+            case "T":
+                addTime = 10;
                 break;
         }
+        _context.time += addTime;
         //過5秒後取消buff
         yield return new WaitForSeconds(5);
         //速度變回原本的速度

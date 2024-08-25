@@ -43,7 +43,7 @@ public class Item : MonoBehaviour
         GameObject go = Instantiate(vfxValuePrefab, transform.position, Quaternion.identity);
         VFXValue vFXValue = go.GetComponent<VFXValue>();
         vFXValue.SetText(vfxValue);
-        return vfxValue;
+        return alphabetTag;
     }
     public virtual void ItemTriggerEnter(Collider2D other)
     {
