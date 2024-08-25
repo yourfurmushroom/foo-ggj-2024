@@ -4,31 +4,24 @@ using UnityEngine;
 
 public class movement : MonoBehaviour
 {
-    [SerializeField]
-    KeyCode menuKey;
     [SerializeField] private float moveLerp = .5f;
     float xDirectional;
     [SerializeField]
     float moveSpeed;
     
     // Update is called once per frame
-    void Update()
+    void OnUpdate(float time)
     {
         xDirectional = Input.GetAxis("Horizontal");
 
-        var calculatedBodyPosition = CalBodyPosition(this.transform.position, this.transform.right, xDirectional);
+        var calculatedBodyPosition = CalBodyPosition(this.transform.position, this.transform.right, xDirectional,time);
         this.transform.position = Vector3.Lerp(this.transform.position, calculatedBodyPosition, moveLerp);
 
 
-        if(Input.GetKeyDown(menuKey))
-        {
-            //call menu
-        }
-
     }
 
-    private Vector3 CalBodyPosition(Vector3 position, Vector3 right, float input)
+    private Vector3 CalBodyPosition(Vector3 position, Vector3 right, float input,float time)
     {
-        return position + (right * input * moveSpeed * Time.deltaTime);
+        return position + (right * input * moveSpeed * time);
     }
 }
