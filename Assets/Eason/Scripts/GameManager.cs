@@ -85,6 +85,10 @@ public class GameManager : MonoBehaviour
             {
                 _gamePlayWindow?.CleanAllLetter();
             };
+            itemController.updateBuff += (buff) =>
+            {
+                _gamePlayWindow?.SetBuff(buff);
+            };
         }
         backgroundController.speedAttribute = _context.speedAttribute;
 

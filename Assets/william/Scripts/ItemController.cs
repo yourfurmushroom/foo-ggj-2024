@@ -28,6 +28,7 @@ public class ItemController : MonoBehaviour
     public Action<string> triggerAlphabetTagEnter;
     public Action triggerEquipmentGet;
     public Action cleanAlphabetTag;
+    public Action<string> updateBuff;
     private List<string> LEGACY = new List<string> { "L", "E", "G", "A", "C", "Y" };
     //收集的字母
     private List<string> collectedAlphabet = new List<string>();
@@ -189,23 +190,27 @@ public class ItemController : MonoBehaviour
                 buffActive = true;
                 speedAttribute.speed += 2;
                 addTime = 2;
+                updateBuff?.Invoke("速度變兩倍");
                 break;
             case "S":
                 //速度變一半
                 buffActive = true;
                 speedAttribute.speed -= 2;
                 addTime = 2;
+                updateBuff?.Invoke("速度變一半");
                 break;
             case "P":
                 //玩家無法移動
                 buffActive = true;
                 playerMovement.enabled = false;
                 addTime = 2;
+                updateBuff?.Invoke("玩家無法移動");
                 break;
             case "D":
                 //全場景變暗
                 buffActive = true;
                 addTime = 2;
+
                 break;
             case "B":
                 //全場景變亮
@@ -222,6 +227,10 @@ public class ItemController : MonoBehaviour
                 break;
         }
         _context.time += addTime;
+        if (!buffActive)
+        {
+            yield break;
+        }
         //過5秒後取消buff
         yield return new WaitForSeconds(5);
         //速度變回原本的速度
@@ -232,6 +241,7 @@ public class ItemController : MonoBehaviour
             case "F":
                 break;
         }
+        updateBuff?.Invoke("無Buff");
         buffActive = false;
     }
 
