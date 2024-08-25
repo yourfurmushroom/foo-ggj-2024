@@ -260,7 +260,7 @@ public class ItemController : MonoBehaviour
             case "F":
                 break;
         }
-        updateBuff?.Invoke("無Buff");
+        updateBuff?.Invoke("");
         buffActive = false;
     }
 

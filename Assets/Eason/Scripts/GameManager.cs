@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         _gameMenuWindow?.closed?.AddListener(OnMenuWindowClosed);
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
         _gamePlayWindow.Initialize(_context.equipmentContext.equipments.Select(o => o.icon).ToArray());
-        _gamePlayWindow?.SetBuff("無Buff");
+        _gamePlayWindow?.SetBuff("");
         _context.speedAttribute.speed = _context.dropSpeed;
         _context.equipmentContext.equipmentAdded += (i) =>
         {
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
                     _context.time = 0;
                     OnHpZero();
                 }
-                _gamePlayWindow?.SetStatus(_context.time, _context.depth, "無Buff");
+                _gamePlayWindow?.SetStatus(_context.time, _context.depth, "");
                 break;
             case GameState.GameOver:
                 break;
