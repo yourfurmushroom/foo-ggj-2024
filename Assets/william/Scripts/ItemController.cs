@@ -163,13 +163,13 @@ public class ItemController : MonoBehaviour
             case "F":
                 //速度變兩倍
                 buffActive = true;
-                speedAttribute.speed -= 2;
+                speedAttribute.speed += 2;
                 addTime = 2;
                 break;
             case "S":
                 //速度變一半
                 buffActive = true;
-                speedAttribute.speed += 2;
+                speedAttribute.speed -= 2;
                 addTime = 2;
                 break;
             case "P":
