@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         _gameMenuWindow?.closed?.AddListener(OnMenuWindowClosed);
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
-
+        _gamePlayWindow?.SetBuff("無Buff");
         _context.speedAttribute.speed = _context.dropSpeed;
         _context.equipmentContext.equipmentAdded += (i) =>
         {
@@ -90,6 +90,10 @@ public class GameManager : MonoBehaviour
             itemController.cleanAlphabetTag += () =>
             {
                 _gamePlayWindow?.CleanAllLetter();
+            };
+            itemController.updateBuff += (buff) =>
+            {
+                _gamePlayWindow?.SetBuff(buff);
             };
         }
         backgroundController.speedAttribute = _context.speedAttribute;
@@ -154,6 +158,10 @@ public class GameManager : MonoBehaviour
         _context.state = GameState.GameOver;
         _context.speedAttribute.ToZero();
         playerMovement.activeFlag = false;
+        foreach (var itemController in itemControllers)
+        {
+            itemController.OnGameOver();
+        }
 
         StartCoroutine(GameOverCoroutine());
     }

@@ -35,6 +35,11 @@ public class GamePlayWindow : Window
         //顯示小數點後兩位
         _timeText.text = time.ToString("F2") + "s";
         _depthText.text = depth.ToString("F2") + "m";
+        // _buffText.text = buff;
+    }
+
+    public void SetBuff(string buff)
+    {
         _buffText.text = buff;
     }
 
