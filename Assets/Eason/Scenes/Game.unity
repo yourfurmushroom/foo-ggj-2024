@@ -726,17 +726,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 195b5824fe5379647aafc330ad7f2b42, type: 3}
---- !u!114 &784542707 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4157136912733275373, guid: 195b5824fe5379647aafc330ad7f2b42, type: 3}
-  m_PrefabInstance: {fileID: 784542706}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e3c984f7ca1c5042b7e9a8d48107f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1205821028 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5314118052471196756, guid: 417c28ff0ce400042b63d3248b0454fd, type: 3}
@@ -816,6 +805,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1588689381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4157136912733275373, guid: 195b5824fe5379647aafc330ad7f2b42, type: 3}
+  m_PrefabInstance: {fileID: 89649054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3c984f7ca1c5042b7e9a8d48107f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1723456613 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5314118053031562837, guid: 417c28ff0ce400042b63d3248b0454fd, type: 3}
@@ -919,44 +919,38 @@ MonoBehaviour:
     _state: 1
     _depth: 0
     _hp: 2
-    _time: 60
+    _time: 20
     _legacyEquipment: 0
     _dropSpeed: 3
     _equipmentContext:
       _equipments:
       - id: 0
-        name: 
-        icon: {fileID: 21300000, guid: f0afc45390b72594ba99d8a99c3b43a4, type: 3}
+        name: 0
+        icon: {fileID: 21300000, guid: ba651704b75e78040b0852648079aaf6, type: 3}
       - id: 1
-        name: 
-        icon: {fileID: 21300000, guid: ea0567c320246d44995410ec29758760, type: 3}
+        name: 1
+        icon: {fileID: 21300000, guid: 5cdcd7d126205ae40aeb03eadcd442e3, type: 3}
       - id: 2
-        name: 
-        icon: {fileID: 21300000, guid: 58d91b63cd5eaa7468253146b87fb00f, type: 3}
+        name: 2
+        icon: {fileID: 21300000, guid: 575d80a29f83568499f0fe598d798b73, type: 3}
       - id: 3
-        name: 
-        icon: {fileID: 21300000, guid: 2015a3fe2b9fdc14498e7be8c0da2203, type: 3}
-      - id: 3
-        name: 
-        icon: {fileID: 21300000, guid: f0afc45390b72594ba99d8a99c3b43a4, type: 3}
-      - id: 3
-        name: 
-        icon: {fileID: 21300000, guid: ea0567c320246d44995410ec29758760, type: 3}
-      - id: 3
-        name: 
-        icon: {fileID: 21300000, guid: 58d91b63cd5eaa7468253146b87fb00f, type: 3}
-      - id: 3
-        name: 
-        icon: {fileID: 21300000, guid: 2015a3fe2b9fdc14498e7be8c0da2203, type: 3}
-      _repositoryEquipments: 030000000500000007000000
-      _equippedEquipments: 010000000300000004000000050000000600000007000000
+        name: 3
+        icon: {fileID: 21300000, guid: e989caaa9303a38478166bc935515f79, type: 3}
+      - id: 4
+        name: 4
+        icon: {fileID: 21300000, guid: c2a0cdd2ccf1994418df8d474fb44de3, type: 3}
+      - id: 5
+        name: 5
+        icon: {fileID: 21300000, guid: 92ebc07365fd27544a4df1cbc1edc979, type: 3}
+      _repositoryEquipments: 
+      _equippedEquipments: 
     speedAttribute:
       _speed: 0
   _gameMenuWindow: {fileID: 334944868}
   _gameOverWindow: {fileID: 1205821028}
   _gamePlayWindow: {fileID: 1723456613}
   itemControllers:
-  - {fileID: 784542707}
+  - {fileID: 1588689381}
   backgroundController: {fileID: 196781095}
   playerMovement: {fileID: 756310282}
 --- !u!1001 &3542352589024929134
