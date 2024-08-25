@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class GamePlayWindow : Window
     [SerializeField] private Color _letterActiveColor;
     [SerializeField] private Color _letterDeactiveColor;
     [Header("Components")]
-    [SerializeField] private TextMeshProUGUI _hpText;
+    [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _depthText;
     [SerializeField] private TextMeshProUGUI _buffText;
 
@@ -18,14 +19,20 @@ public class GamePlayWindow : Window
 
     [SerializeField] private Image[] _letterIcon;
 
+
     private void Initialized()
     {
     }
 
-    public void SetStatus(float hp, float depth, string buff)
+    void Update()
     {
-        _hpText.text = hp.ToString();
-        _depthText.text = depth.ToString() + "m";
+    }
+
+    public void SetStatus(float time, float depth, string buff)
+    {
+        //顯示小數點後兩位
+        _timeText.text = time.ToString("F2") + "s";
+        _depthText.text = depth.ToString("F2") + "m";
         _buffText.text = buff;
     }
 

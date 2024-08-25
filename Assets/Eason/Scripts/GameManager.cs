@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
             itemController.StartAutoGenerate();
         }
         backgroundController.speedAttribute = _context.speedAttribute;
+
+
     }
 
     private void OnMenuWindowClosed()
@@ -78,8 +80,10 @@ public class GameManager : MonoBehaviour
                 _context.depth += _context.speedAttribute.speed * Time.deltaTime;
                 if (_context.time <= 0)
                 {
+                    _context.time = 0;
                     OnHpZero();
                 }
+                _gamePlayWindow?.SetStatus(_context.time, _context.depth, "無Buff");
                 break;
             case GameState.GameOver:
                 break;
