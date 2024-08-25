@@ -18,6 +18,7 @@ public class GamePlayWindow : Window
     [SerializeField] private Transform _equimentIconParent;
 
     [SerializeField] private Image[] _letterIcon;
+    [SerializeField] private GameObject[] _letterGameObjects;
 
 
     private void Initialized()
@@ -38,7 +39,8 @@ public class GamePlayWindow : Window
 
     public void ActivateLetter(int index, bool active)
     {
-        _letterIcon[index].color = active ? _letterActiveColor : _letterDeactiveColor;
+        _letterGameObjects[index].SetActive(active);
+        // _letterIcon[index].color = active ? _letterActiveColor : _letterDeactiveColor;
     }
 
     public void AddEquipment(Sprite icon)

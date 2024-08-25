@@ -54,6 +54,28 @@ public class GameManager : MonoBehaviour
             itemController.SetSpeedAttribute(_context.speedAttribute);
             itemController.SetGameContext(_context);
             itemController.StartAutoGenerate();
+            itemController.triggerAlphabetTagEnter += (tag) =>
+            {
+                Debug.Log(tag);
+                int index = 0;
+                switch (tag)
+                {
+                    case "L":
+                        index = 0;
+                        break;
+                    case "E":
+                        index = 1; break;
+                    case "G":
+                        index = 2; break;
+                    case "A":
+                        index = 3; break;
+                    case "C":
+                        index = 4; break;
+                    case "Y":
+                        index = 5; break;
+                }
+                _gamePlayWindow?.ActivateLetter(index, true);
+            };
         }
         backgroundController.speedAttribute = _context.speedAttribute;
 

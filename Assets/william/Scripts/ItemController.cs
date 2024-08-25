@@ -25,6 +25,7 @@ public class ItemController : MonoBehaviour
     private Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
     private bool buffActive = false;
     [SerializeField] private GameContext _context;
+    public Action<string> triggerAlphabetTagEnter;
     private void Awake()
     {
         for (int i = 0; i < posRoot.childCount; i++)
@@ -137,6 +138,7 @@ public class ItemController : MonoBehaviour
                         {
 
                             string alphabetTag = item.ItemCustomAction();
+                            triggerAlphabetTagEnter?.Invoke(alphabetTag);
                             Debug.Log("Player Hit alphabetTag: " + alphabetTag);
                             StartCoroutine(ActiveBuff(alphabetTag));
                         }
