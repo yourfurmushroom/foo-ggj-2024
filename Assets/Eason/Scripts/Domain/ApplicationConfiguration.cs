@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,10 +19,30 @@ public class EquipmentContext
     [SerializeField] private List<int> _repositoryEquipments;
     [SerializeField] private List<int> _equippedEquipments;
 
+    [SerializeField] public event Action<int> equipmentAdded;
+
     public Equipment[] equipments { get => _equipments; }
     public List<int> repositoryEquipments { get => _repositoryEquipments; }
     public List<int> equippedEquipments { get => _equippedEquipments; }
-
+    public int[] GetNotGainEquipments()
+    {
+        var count = equipments.Length;
+        var equippedCount = equippedEquipments.Count;
+        var notGainCount = count - equippedCount;
+        var rt = new int[notGainCount];
+        var i = 0;
+        var j = 0;
+        var k = 0;
+        while (i < count)
+        {
+            if (_equippedEquipments[j] < i)
+            {
+                rt[k++] = i;
+            }
+            i++;
+        }
+        return rt;
+    }
     public int[] GetNewGainEquipments()
     {
         var repoCount = _repositoryEquipments.Count;
@@ -49,6 +70,11 @@ public class EquipmentContext
             }
         }
         return rt;
+    }
+    public void AddEquipment(int id)
+    {
+        _equippedEquipments.Add(id);
+        equipmentAdded?.Invoke(id);
     }
 }
 

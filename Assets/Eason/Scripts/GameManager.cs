@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
 
         _context.speedAttribute.speed = _context.dropSpeed;
+        _context.equipmentContext.equipmentAdded += (i) =>
+        {
+            _gamePlayWindow.AddEquipment(i);
+        };
         foreach (var itemController in itemControllers)
         {
             itemController.SetSpeedAttribute(_context.speedAttribute);
@@ -78,8 +82,10 @@ public class GameManager : MonoBehaviour
             };
             itemController.triggerEquipmentGet += () =>
             {
-                // _context.legacyEquipment++;
-                // _gamePlayWindow?.AddEquipment(_context.equipmentContext.equipments[0].icon);
+                var notGainEquipments = _context.equipmentContext.GetNotGainEquipments();
+                var ii = UnityEngine.Random.Range(0, notGainEquipments.Length);
+                var index = notGainEquipments[ii];
+                _context.equipmentContext.AddEquipment(index);
             };
             itemController.cleanAlphabetTag += () =>
             {

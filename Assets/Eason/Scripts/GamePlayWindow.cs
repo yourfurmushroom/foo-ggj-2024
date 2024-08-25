@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GamePlayWindow : Window
 {
     [Header("Settings")]
+    [SerializeField] private Sprite[] _icons; 
     [SerializeField] private Color _letterActiveColor;
     [SerializeField] private Color _letterDeactiveColor;
     [Header("Components")]
@@ -52,9 +53,9 @@ public class GamePlayWindow : Window
         }
     }
 
-    public void AddEquipment(Sprite icon)
+    public void AddEquipment(int index)
     {
         var instance = Instantiate(_equipmentIconPrefab, _equimentIconParent);
-        instance.sprite = icon;
+        instance.sprite = _icons[index];
     }
 }
