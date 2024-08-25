@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public string alphabetTag = "A";
     public Action<string> onHitFrom;
     public Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
     private GameObject vfxValuePrefab;
@@ -36,12 +37,13 @@ public class Item : MonoBehaviour
     public virtual void Move()
     {
     }
-    public virtual void ItemCustomAction()
+    public virtual string ItemCustomAction()
     {
         //在物件的原點產生特效
         GameObject go = Instantiate(vfxValuePrefab, transform.position, Quaternion.identity);
         VFXValue vFXValue = go.GetComponent<VFXValue>();
         vFXValue.SetText(vfxValue);
+        return vfxValue;
     }
     public virtual void ItemTriggerEnter(Collider2D other)
     {

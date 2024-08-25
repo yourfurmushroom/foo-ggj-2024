@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         foreach (var itemController in itemControllers)
         {
             itemController.SetSpeedAttribute(_context.speedAttribute);
+            itemController.SetGameContext(_context);
             itemController.StartAutoGenerate();
         }
         backgroundController.speedAttribute = _context.speedAttribute;

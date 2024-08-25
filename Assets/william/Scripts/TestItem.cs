@@ -33,17 +33,17 @@ public class TestItem : Item
         //如果碰到deadZoneBoxCollider，就呼叫Remove方法
         onHitFrom?.Invoke(other.tag);
     }
-    override public void ItemCustomAction()
-    {
-        speedAttribute.speed += modifySpeed;
-        Debug.Log("TestItem CustomAction");
-        //判斷value是正數還是負數決定要顯示的字串
-        if (modifySpeed < 0)
-            vfxValue = "Speed - " + Mathf.Abs(modifySpeed);
-        else
-            vfxValue = "Speed + " + modifySpeed;
-        base.ItemCustomAction();
-    }
+    // override public void ItemCustomAction()
+    // {
+    //     speedAttribute.speed += modifySpeed;
+    //     Debug.Log("TestItem CustomAction");
+    //     //判斷value是正數還是負數決定要顯示的字串
+    //     if (modifySpeed < 0)
+    //         vfxValue = "Speed - " + Mathf.Abs(modifySpeed);
+    //     else
+    //         vfxValue = "Speed + " + modifySpeed;
+    //     base.ItemCustomAction();
+    // }
     override public void Remove()
     {
         Debug.Log("TestItem Remove");

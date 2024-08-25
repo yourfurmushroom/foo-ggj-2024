@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class ItemController : MonoBehaviour
 {
+    public movement playerMovement;
     public Transform posRoot;
     //隨機產生的position位置
     private List<Transform> points = new List<Transform>();
@@ -23,13 +24,18 @@ public class ItemController : MonoBehaviour
     private List<Item> _items = new List<Item>();
     private Dictionary<string, Attribute> attributeDic = new Dictionary<string, Attribute>();
     private bool buffActive = false;
-
+    [SerializeField] private GameContext _context;
     private void Awake()
     {
         for (int i = 0; i < posRoot.childCount; i++)
         {
             points.Add(posRoot.GetChild(i));
         }
+    }
+
+    public void SetGameContext(GameContext context)
+    {
+        _context = context;
     }
 
     /// <summary>
@@ -98,52 +104,93 @@ public class ItemController : MonoBehaviour
     //產生物品
     public void GenerateItem()
     {
-        //隨機選擇一個位置
-        int index = UnityEngine.Random.Range(0, points.Count);
-        Vector3 position = points[index].position;
-        //產生物品
-        Item item = Instantiate(itemPrefab, position, Quaternion.identity).GetComponent<Item>();
-        item.Init(attributeDic);
-        item.SetVFXValuePrefab(vfxValuePrefab);
-        item.onHitFrom += (FromTag) =>
+
+        //產生物品的數量，1次 = weight 5, 2次 = weight 3,3次 = weight 2
+        int count = UnityEngine.Random.Range(0, 10) < 5 ? 1 : UnityEngine.Random.Range(0, 10) < 3 ? 2 : 3;
+        //紀錄這次產生的物品
+        List<GameObject> tempItems = new List<GameObject>();
+        for (int i = 0; i < count; i++)
         {
-            switch (FromTag)
+            //隨機選擇一個位置
+            int index = UnityEngine.Random.Range(0, points.Count);
+            Vector3 position = points[index].position;
+            GameObject obj = itemPrefab;
+            //如果這次產生的物品已經有了，就重新產生
+            while (tempItems.Contains(obj))
             {
-                case "Player":
-                    Debug.Log("Player Hit");
-                    if (!buffActive)
-                    {
+                obj = itemPrefab;
+            }
+            tempItems.Add(obj);
+            Item item = Instantiate(obj, position, Quaternion.identity).GetComponent<Item>();
+            item.Init(attributeDic);
+            item.SetVFXValuePrefab(vfxValuePrefab);
+            item.onHitFrom += (FromTag) =>
+            {
+                switch (FromTag)
+                {
+                    case "Player":
+                        Debug.Log("Player Hit");
+                        if (!buffActive)
+                        {
 
-                        item.ItemCustomAction();
-                        //過5秒後取消buff
-                        // StartCoroutine(CancelBuff());
-                    }
-                    break;
-                case "DeadZone":
-                    Debug.Log("DeadZone Hit");
-                    break;
+                            string alphabetTag = item.ItemCustomAction();
+                            float addTime = alphabetTag == "T" ? 10 : 2;
+                            _context.time += addTime;
+
+                            StartCoroutine(ActiveBuff(alphabetTag));
+                        }
+                        break;
+                    case "DeadZone":
+                        Debug.Log("DeadZone Hit");
+                        break;
+                };
+
+                OnRemoveItem(item);
             };
+            _items.Add(item);
+        }
 
-            OnRemoveItem(item);
-        };
-        _items.Add(item);
     }
 
-    IEnumerator ActiveBuff(Item itemSource)
+    IEnumerator ActiveBuff(string alphabetTag)
     {
         buffActive = true;
-        switch (itemSource.GetItemTypeName())
+        SpeedAttribute speedAttribute = attributeDic["SpeedAttribute"] as SpeedAttribute;
+        float ori_speed = speedAttribute.speed;
+        switch (alphabetTag)
         {
-            case "TestItem":
-                SpeedAttribute speedAttribute = attributeDic["SpeedAttribute"] as SpeedAttribute;
-                speedAttribute.speed += 1;
+            case "F":
+                //速度變兩倍
+                speedAttribute.speed *= 2;
                 break;
-            case "HpItem":
-                HpAttribute hpAttribute = attributeDic["HpAttribute"] as HpAttribute;
-                hpAttribute.hp += 1;
+            case "S":
+                //速度變一半
+                speedAttribute.speed /= 2;
+                break;
+            case "P":
+                //玩家無法移動
+                playerMovement.enabled = false;
+                break;
+            case "D":
+                //全場景變暗
+                break;
+            case "B":
+                //全場景變亮
+                break;
+            case "M":
+                //標示其他字母
                 break;
         }
+        //過5秒後取消buff
         yield return new WaitForSeconds(5);
+        //速度變回原本的速度
+        speedAttribute.speed = ori_speed;
+        playerMovement.enabled = true;
+        switch (alphabetTag)
+        {
+            case "F":
+                break;
+        }
         buffActive = false;
     }
 

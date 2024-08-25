@@ -8,7 +8,7 @@ public class ABCItem : Item
     //改變生命力的值
     public float value = 1.0f;
     public SpeedAttribute speedAttribute;
-    public string alphabetTag = "A";
+
     public TextMeshProUGUI alphabetText;
     public override void Init(Dictionary<string, Attribute> dic)
     {
@@ -32,12 +32,12 @@ public class ABCItem : Item
     {
         onHitFrom?.Invoke(other.tag);
     }
-    override public void ItemCustomAction()
+    override public string ItemCustomAction()
     {
         Debug.Log("ABCItem CustomAction get alphabetTag: " + alphabetTag);
         vfxValue = "Got " + alphabetTag + "!";
-        base.ItemCustomAction();
-        //TODO: Add tag to game manager
+
+        return base.ItemCustomAction();
     }
     override public void Remove()
     {

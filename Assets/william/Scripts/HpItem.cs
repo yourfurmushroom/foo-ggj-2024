@@ -32,17 +32,17 @@ public class HpItem : Item
         Debug.Log("HpItem OnTriggerEnter");
         onHitFrom?.Invoke(other.tag);
     }
-    override public void ItemCustomAction()
-    {
-        Debug.Log("HpItem CustomAction");
-        hpAttribute.hp += value;
-        //判斷value是正數還是負數決定要顯示的字串
-        if (value < 0)
-            vfxValue = "Hp - " + Mathf.Abs(value);
-        else
-            vfxValue = "Hp + " + value;
-        base.ItemCustomAction();
-    }
+    // override public void ItemCustomAction()
+    // {
+    //     Debug.Log("HpItem CustomAction");
+    //     hpAttribute.hp += value;
+    //     //判斷value是正數還是負數決定要顯示的字串
+    //     if (value < 0)
+    //         vfxValue = "Hp - " + Mathf.Abs(value);
+    //     else
+    //         vfxValue = "Hp + " + value;
+    //     base.ItemCustomAction();
+    // }
     override public void Remove()
     {
         Debug.Log("HpItem Remove");
