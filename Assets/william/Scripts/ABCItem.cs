@@ -36,7 +36,10 @@ public class ABCItem : Item
     {
         Debug.Log("ABCItem CustomAction get alphabetTag: " + alphabetTag);
         vfxValue = "Got " + alphabetTag + "!";
-
+        if (alphabetTag == "T")
+        {
+            vfxValue = "Got Time!";
+        }
         return base.ItemCustomAction();
     }
     override public void Remove()

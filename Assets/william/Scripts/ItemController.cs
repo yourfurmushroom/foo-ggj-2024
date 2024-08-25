@@ -204,39 +204,42 @@ public class ItemController : MonoBehaviour
                 buffActive = true;
                 speedAttribute.speed += 2;
                 addTime = 2;
-                updateBuff?.Invoke("速度變兩倍");
+                updateBuff?.Invoke("Fast");
                 break;
             case "S":
                 //速度變一半
                 buffActive = true;
                 speedAttribute.speed -= 2;
                 addTime = 2;
-                updateBuff?.Invoke("速度變一半");
+                updateBuff?.Invoke("Slow");
                 break;
             case "P":
                 //玩家無法移動
                 buffActive = true;
                 playerMovement.enabled = false;
                 addTime = 2;
-                updateBuff?.Invoke("玩家無法移動");
+                updateBuff?.Invoke("Pause");
                 break;
             case "D":
                 //全場景變暗
                 buffActive = true;
                 addTime = 2;
                 playerMovement.fog.transform.localScale = new Vector3(3, 3, 3);
+                updateBuff?.Invoke("Dark");
                 break;
             case "B":
                 //全場景變亮
                 buffActive = true;
                 addTime = 2;
                 playerMovement.fog.transform.localScale = new Vector3(12, 12, 12);
+                updateBuff?.Invoke("Bright");
                 break;
-            case "M":
-                //標示其他字母
-                buffActive = true;
-                addTime = 2;
-                break;
+            // case "M":
+            //     //標示其他字母
+            //     buffActive = true;
+            //     addTime = 2;
+            //     updateBuff?.Invoke("Mark");
+            //     break;
             case "T":
                 addTime = 10;
                 break;

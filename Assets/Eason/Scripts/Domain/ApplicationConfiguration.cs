@@ -17,11 +17,11 @@ public struct Equipment
 [Serializable]
 public class EquipmentContext
 {
-    [SerializeField] private Equipment[] _equipments;
-    [SerializeField] private List<int> _repositoryEquipments;
-    [SerializeField] private List<int> _equippedEquipments;
+    [SerializeField] private Equipment[] _equipments = new Equipment[0];
+    [SerializeField] private List<int> _repositoryEquipments = new List<int>();
+    [SerializeField] private List<int> _equippedEquipments = new List<int>();
 
-    [SerializeField] public event Action<int> equipmentAdded;
+    [SerializeField] public event Action<int> equipmentAdded = delegate { };
 
     public Equipment[] equipments { get => _equipments; }
     public List<int> repositoryEquipments { get => _repositoryEquipments; }
@@ -46,7 +46,7 @@ public class EquipmentContext
         repositoryEquipments.Sort();
         equippedEquipments.Sort();
         var rt = new int[diffCount];
-        { 
+        {
             var i = 0;
             var j = 0;
             var k = 0;
