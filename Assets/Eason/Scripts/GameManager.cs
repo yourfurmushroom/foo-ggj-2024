@@ -42,12 +42,13 @@ public class GameManager : MonoBehaviour
     public List<ItemController> itemControllers;
     public BackgroundController backgroundController;
     public movement playerMovement;
+    public AudioManager audioManager;
 
     private void Awake()
     {
         _gameMenuWindow?.closed?.AddListener(OnMenuWindowClosed);
         _gameMenuWindow.Initialize(_applicationConfiguration.scenes.mainMenu, _applicationConfiguration.scenes.game);
-        _gamePlayWindow.Initialize(_context.equipmentContext.equipments.Select(o=>o.icon).ToArray());
+        _gamePlayWindow.Initialize(_context.equipmentContext.equipments.Select(o => o.icon).ToArray());
         _gamePlayWindow?.SetBuff("無Buff");
         _context.speedAttribute.speed = _context.dropSpeed;
         _context.equipmentContext.equipmentAdded += (i) =>
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
             itemController.StartAutoGenerate();
             itemController.triggerAlphabetTagEnter += (tag) =>
             {
+                audioManager.PlayAlphabet();
                 Debug.Log(tag);
                 int index = 0;
                 switch (tag)
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
             };
             itemController.triggerEquipmentGet += () =>
             {
+                audioManager.PlayEquipment();
                 var notGainEquipments = _context.equipmentContext.GetNotGainEquipments();
                 var ii = UnityEngine.Random.Range(0, notGainEquipments.Length);
                 var index = notGainEquipments[ii];
@@ -100,6 +103,11 @@ public class GameManager : MonoBehaviour
         backgroundController.speedAttribute = _context.speedAttribute;
 
 
+    }
+
+    void Start()
+    {
+        audioManager.PlayBGM();
     }
 
     private void OnMenuWindowClosed()
@@ -156,6 +164,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnHpZero()
     {
+        audioManager.PlayDead();
         _context.state = GameState.GameOver;
         _context.speedAttribute.ToZero();
         playerMovement.activeFlag = false;
@@ -170,6 +179,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOverCoroutine()
     {
         yield return new WaitForSeconds(2);
+        audioManager.StopBGM();
         var equipments = _context.equipmentContext.equipments;
         var newGainEquipments = _context.equipmentContext.GetNewGainEquipments();
         var icons = newGainEquipments.Select(i => equipments[i].icon).ToArray();
