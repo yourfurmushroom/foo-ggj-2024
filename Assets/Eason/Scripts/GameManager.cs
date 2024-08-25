@@ -152,10 +152,18 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(_applicationConfiguration.keymap.cancel) && _context.state == GameState.GameMenu)
         {
+            foreach (var itemController in itemControllers)
+            {
+                itemController.puase = false;
+            }
             _gameMenuWindow?.Close();
         }
         else if (Input.GetKeyDown(_applicationConfiguration.keymap.cancel) && _context.state == GameState.GamePlay)
         {
+            foreach (var itemController in itemControllers)
+            {
+                itemController.puase = true;
+            }
             {
                 _context.state = GameState.GameMenu;
                 _gameMenuWindow?.Open();

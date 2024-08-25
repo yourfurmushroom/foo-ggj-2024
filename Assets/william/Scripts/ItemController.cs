@@ -32,6 +32,7 @@ public class ItemController : MonoBehaviour
     private List<string> LEGACY = new List<string> { "L", "E", "G", "A", "C", "Y" };
     //收集的字母
     private List<string> collectedAlphabet = new List<string>();
+    public bool puase = false;
     private void Awake()
     {
         for (int i = 0; i < posRoot.childCount; i++)
@@ -77,6 +78,10 @@ public class ItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (puase)
+        {
+            return;
+        }
         if (_items.Count == 0)
         {
             return;

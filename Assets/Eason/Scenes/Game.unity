@@ -726,6 +726,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 195b5824fe5379647aafc330ad7f2b42, type: 3}
+--- !u!1001 &979668476
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1506147140205107040, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.51653
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.696708
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.35751036
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506147140205107042, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+--- !u!114 &979668477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1506147140205107041, guid: 3bc5e46d7de91884288a43bf14528ad8, type: 3}
+  m_PrefabInstance: {fileID: 979668476}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f01f633f493b242a77e254bc713ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1205821028 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5314118052471196756, guid: 417c28ff0ce400042b63d3248b0454fd, type: 3}
@@ -805,10 +873,10 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1588689381 stripped
+--- !u!114 &1658802187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4157136912733275373, guid: 195b5824fe5379647aafc330ad7f2b42, type: 3}
-  m_PrefabInstance: {fileID: 89649054}
+  m_PrefabInstance: {fileID: 784542706}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -919,7 +987,7 @@ MonoBehaviour:
     _state: 1
     _depth: 0
     _hp: 2
-    _time: 20
+    _time: 30
     _legacyEquipment: 0
     _dropSpeed: 3
     _equipmentContext:
@@ -950,9 +1018,10 @@ MonoBehaviour:
   _gameOverWindow: {fileID: 1205821028}
   _gamePlayWindow: {fileID: 1723456613}
   itemControllers:
-  - {fileID: 1588689381}
+  - {fileID: 1658802187}
   backgroundController: {fileID: 196781095}
   playerMovement: {fileID: 756310282}
+  audioManager: {fileID: 979668477}
 --- !u!1001 &3542352589024929134
 PrefabInstance:
   m_ObjectHideFlags: 0
